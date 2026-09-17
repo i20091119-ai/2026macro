@@ -7,7 +7,7 @@
 
 const CONFIG = {
   // Apps Script 웹앱 배포 URL(…/exec). README의 배포 절차 참고.
-  ENDPOINT: '',
+  ENDPOINT: 'https://script.google.com/macros/s/AKfycbxOFRRqnfgABnEg-e5UaxOzMbbwQdI5QR7wDT4A2q7bzReGErN16Gk0hBq7Lz45Sq6l/exec',
   DATA_URL: 'data/schools.json',
   ADMIN: { org: '경남수학문화관', name: '이상우', phone: '055-713-2197' },
   RETENTION: '2026. 12. 31.(사업 결과보고 완료 시)까지 보유 후 지체 없이 파기',
