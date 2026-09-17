@@ -22,23 +22,15 @@ var HEADERS = [
   ['program', '신청 프로그램'],
   ['teacherName', '담당교사 성명'],
   ['teacherPhone', '담당교사 연락처'],
-  ['schoolPhone', '학교 대표번호'],
-  ['altContact', '당일 부재 시 대체 연락처'],
   ['p12Time', '1~2교시 시각'],
   ['p34Time', '3~4교시 시각'],
-  ['breakOk', '교구 정비 10분 확보'],
-  ['breakInfo', '중간놀이·쉬는 시간 위치'],
   ['rooms', '교시별 수업 장소'],
   ['floorInfo', '교실 위치(층)'],
   ['elevator', '엘리베이터'],
-  ['unloadPoint', '교구 하역 지점'],
   ['laptops', '1인 1노트북 구비(교실별)'],
   ['wifi', '무선 인터넷'],
   ['display', '화면 송출 장치'],
   ['displayConn', '연결 방식'],
-  ['usbPort', '노트북 USB 포트'],
-  ['securityRestrict', '외부 기기 연결 제한'],
-  ['groupSeating', '2인 1모둠 배치'],
   ['threeClass', '교시당 3개 학급 동시 수업 확인'],
   ['threeClassActual', '실제 학급 수'],
   ['threeRooms', '교실 3실 확보'],
@@ -48,13 +40,6 @@ var HEADERS = [
   ['programChangeTo', '변경 희망 프로그램'],
   ['programChangeReason', '변경 사유'],
   ['parking', '주차 가능 위치'],
-  ['vehicleRestriction', '차량 진입 제한 시간대'],
-  ['entryProcedure', '외부인 출입 절차'],
-  ['confirmedCounts', '학급별 확정 인원'],
-  ['guideTeachers', '학급별 인솔 교사'],
-  ['specialNeeds', '도움 필요 학생·특이사항'],
-  ['mediaConsent', '촬영·결과보고 활용 동의'],
-  ['surveyDevice', '만족도조사(QR) 응답 기기'],
   ['etcRequest', '기타 요청사항'],
   ['userAgent', '응답 기기'],
   ['raw', '원본 JSON'],
@@ -114,6 +99,15 @@ function getSheet_() {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sh = ss.getSheetByName(SHEET_NAME);
   if (!sh) sh = ss.insertSheet(SHEET_NAME);
+  if (sh.getLastRow() > 0) {
+    // 열 구성이 바뀐 경우: 기존 시트를 보존(이름 변경)하고 새 시트를 만든다
+    var cur = sh.getRange(1, 1, 1, Math.max(sh.getLastColumn(), 1)).getValues()[0].join('|');
+    var want = HEADERS.map(function (h) { return h[1]; }).join('|');
+    if (cur !== want) {
+      sh.setName(SHEET_NAME + '_구버전_' + Utilities.formatDate(new Date(), 'Asia/Seoul', 'MMdd_HHmm'));
+      sh = ss.insertSheet(SHEET_NAME, 0);
+    }
+  }
   if (sh.getLastRow() === 0) {
     sh.appendRow(HEADERS.map(function (h) { return h[1]; }));
     sh.setFrozenRows(1);

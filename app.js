@@ -26,23 +26,15 @@ const FIELD_DEFS = [
   ['program', '신청 프로그램', '_'],
   ['teacherName', '담당교사 성명', 'A. 담당자'],
   ['teacherPhone', '담당교사 연락처', 'A. 담당자'],
-  ['schoolPhone', '학교 대표번호', 'A. 담당자'],
-  ['altContact', '당일 부재 시 대체 연락처', 'A. 담당자'],
   ['p12Time', '1~2교시 시각', 'B. 시간'],
   ['p34Time', '3~4교시 시각', 'B. 시간'],
-  ['breakOk', '교구 정비 10분 확보', 'B. 시간'],
-  ['breakInfo', '중간놀이·쉬는 시간 위치', 'B. 시간'],
   ['rooms', '교시별 수업 장소', 'C. 학급·장소'],
   ['floorInfo', '교실 위치(층)', 'C. 학급·장소'],
   ['elevator', '엘리베이터', 'C. 학급·장소'],
-  ['unloadPoint', '교구 하역 지점', 'C. 학급·장소'],
   ['laptops', '1인 1노트북 구비(교실별)', 'D. 기기'],
   ['wifi', '무선 인터넷', 'D. 기기'],
   ['display', '화면 송출 장치', 'D. 기기'],
   ['displayConn', '연결 방식', 'D. 기기'],
-  ['usbPort', '노트북 USB 포트', 'D. 기기'],
-  ['securityRestrict', '외부 기기 연결 제한', 'D. 기기'],
-  ['groupSeating', '2인 1모둠 배치', 'D. 기기'],
   ['threeClass', '교시당 3개 학급 동시 수업 확인', 'E. 학급 편성·프로그램'],
   ['threeClassActual', '실제 학급 수', 'E. 학급 편성·프로그램'],
   ['threeRooms', '교실 3실 확보', 'E. 학급 편성·프로그램'],
@@ -51,15 +43,8 @@ const FIELD_DEFS = [
   ['programChange', '프로그램 변경 희망', 'E. 학급 편성·프로그램'],
   ['programChangeTo', '변경 희망 프로그램', 'E. 학급 편성·프로그램'],
   ['programChangeReason', '변경 사유', 'E. 학급 편성·프로그램'],
-  ['parking', '주차 가능 위치', 'F. 방문·주차'],
-  ['vehicleRestriction', '차량 진입 제한 시간대', 'F. 방문·주차'],
-  ['entryProcedure', '외부인 출입 절차', 'F. 방문·주차'],
-  ['confirmedCounts', '학급별 확정 인원', 'G. 기타'],
-  ['guideTeachers', '학급별 인솔 교사', 'G. 기타'],
-  ['specialNeeds', '도움 필요 학생·특이사항', 'G. 기타'],
-  ['mediaConsent', '촬영·결과보고 활용 동의', 'G. 기타'],
-  ['surveyDevice', '만족도조사(QR) 응답 기기', 'G. 기타'],
-  ['etcRequest', '기타 요청사항', 'G. 기타'],
+  ['parking', '주차 가능 위치', 'F. 주차·기타'],
+  ['etcRequest', '기타 요청사항', 'F. 주차·기타'],
   ['userAgent', '응답 기기', '_'],
   ['raw', '원본 JSON', '_'],
 ];
@@ -244,23 +229,18 @@ function renderForm(s) {
   const A = section('3. 담당자 확인', '수업 당일 연락이 닿아야 하는 분의 정보입니다.',
     field({ name: 'schoolName', label: '학교명', input: `<input id="f-schoolName" type="text" value="${esc(s.name)}" readonly>` }) +
     field({ name: 'teacherName', label: '담당교사 성명', required: true, input: text('teacherName', { required: true, value: primary.name || '', placeholder: '홍길동' }) }) +
-    field({ name: 'teacherPhone', label: '담당교사 연락처(휴대폰)', required: true, input: text('teacherPhone', { type: 'tel', required: true, value: isMobile(primary.phone) ? primary.phone : '', placeholder: '010-0000-0000', inputmode: 'tel' }) }) +
-    field({ name: 'schoolPhone', label: '학교 대표번호', required: true, input: text('schoolPhone', { type: 'tel', required: true, placeholder: '055-000-0000', inputmode: 'tel' }) }) +
-    field({ name: 'altContact', label: '수업 당일 부재 시 대체 연락처', required: true, hint: '성명과 연락처를 함께 적어 주세요. (예: 교무실 김○○ 055-000-0001)', input: text('altContact', { required: true, placeholder: '예: 6학년 부장 김○○ 010-0000-0000' }) }));
+    field({ name: 'teacherPhone', label: '담당교사 연락처(휴대폰)', required: true, input: text('teacherPhone', { type: 'tel', required: true, value: isMobile(primary.phone) ? primary.phone : '', placeholder: '010-0000-0000', inputmode: 'tel' }) }));
 
   const B = section('4. 시간', '학교 일과표 기준으로 적어 주세요.',
     timeRange('p12', '1~2교시 시작 ~ 종료 시각', true) +
     (has34 ? timeRange('p34', '3~4교시 시작 ~ 종료 시각', true)
-      : `<p class="hint">이 학교는 1~2교시만 운영하므로 3~4교시 시각은 입력하지 않습니다.</p>`) +
-    field({ name: 'breakOk', label: '교시 사이에 교구 정비 시간 10분을 확보할 수 있습니까?', required: true, input: radios('breakOk', ['확보 가능', '협의 필요']) }) +
-    field({ name: 'breakInfo', label: '중간놀이·쉬는 시간 위치', required: true, hint: '일과표상 중간놀이(또는 긴 쉬는 시간)가 몇 교시 뒤 몇 분인지 적어 주세요.', input: text('breakInfo', { required: true, placeholder: '예: 2교시 후 중간놀이 20분(10:20~10:40), 쉬는 시간 10분' }) }));
+      : `<p class="hint">이 학교는 1~2교시만 운영하므로 3~4교시 시각은 입력하지 않습니다.</p>`));
 
   const C = section('5. 학급·장소', '신청서에 적힌 장소가 미리 채워져 있습니다. 바뀐 경우 수정해 주세요.',
     state.classes.map((c) => classBox(c,
       field({ name: ck(c, 'room'), label: '수업 장소', required: true, input: text(ck(c, 'room'), { required: true, value: c.room, placeholder: '예: 6-3 교실 / 과학실 / 컴퓨터실' }) }))).join('') +
     field({ name: 'floorInfo', label: '교실 위치(층)', required: true, input: text('floorInfo', { required: true, placeholder: '예: 6학년 교실 모두 3층, 과학실 2층' }) }) +
-    field({ name: 'elevator', label: '엘리베이터', required: true, input: radios('elevator', ['있음', '없음']) }) +
-    field({ name: 'unloadPoint', label: '교구 하역 지점', required: true, hint: '차량을 세우고 교구를 내릴 수 있는 곳(정문·후문·필로티·현관 앞 등)', input: text('unloadPoint', { required: true, placeholder: '예: 후문 필로티 앞, 현관 옆 계단' }) }));
+    field({ name: 'elevator', label: '엘리베이터', required: true, input: radios('elevator', ['있음', '없음']) }));
 
   const D = section('6. 기기', '',
     `<h3 class="sub">교실별 1인 1노트북(아이북) 구비 여부</h3>` +
@@ -272,12 +252,7 @@ function renderForm(s) {
     field({ name: 'wifi', label: '무선 인터넷(와이파이) 정상 동작', required: true, input: radios('wifi', ['예', '아니오', '확인 필요']) }) +
     field({ name: 'display', label: '화면 송출 장치', required: true, input: radios('display', ['TV', '빔프로젝터', '없음']) }) +
     cond('display', '!없음',
-      field({ name: 'displayConn', label: '노트북 연결 방식', required: true, input: radios('displayConn', ['HDMI', '미러링', '확인 필요']) })) +
-    field({ name: 'usbPort', label: '노트북 USB 포트(USB-A) 유무', required: true, hint: '로봇을 USB로 연결하는 프로그램이 있어 확인이 필요합니다.', input: radios('usbPort', ['있음', '없음', '확인 필요']) }) +
-    field({ name: 'securityRestrict', label: '외부 기기 연결 제한(보안 프로그램) 여부', required: true, input: radios('securityRestrict', ['제한 없음', '제한 있음', '확인 필요']) }) +
-    cond('securityRestrict', '제한 있음',
-      field({ name: 'securityDetail', label: '제한 내용', input: text('securityDetail', { placeholder: '예: USB 저장장치 차단, 관리자 승인 필요' }) })) +
-    field({ name: 'groupSeating', label: '2인 1모둠 책걸상 배치 가능', required: true, input: radios('groupSeating', ['가능', '불가(고정 배치)', '협의 필요']) }));
+      field({ name: 'displayConn', label: '노트북 연결 방식', required: true, input: radios('displayConn', ['HDMI', '미러링', '확인 필요']) })));
 
   let E = '';
   if (s.flags && s.flags.threeClass) {
@@ -299,26 +274,12 @@ function renderForm(s) {
       field({ name: 'programChangeReason', label: '변경 사유', required: true, input: textarea('programChangeReason', { required: true, rows: 2, placeholder: '예: 노트북 USB 포트가 없어 연결이 어려움' }) }));
   const Esec = section('7. 학급 편성·프로그램', '', E);
 
-  const F = section('8. 방문·주차', '강사 차량 2~3대가 교구를 싣고 방문합니다.',
+  const F = section('8. 주차·기타', '강사 차량 2~3대가 교구를 싣고 방문합니다.',
     field({ name: 'parking', label: '주차 가능 위치 안내', required: true, input: textarea('parking', { required: true, rows: 2, placeholder: '예: 후문 주차장 방문객 구역 / 운동장 가장자리 주차 가능' }) }) +
-    field({ name: 'vehicleRestriction', label: '차량 진입 제한 시간대', required: true, input: radios('vehicleRestriction', ['없음', '있음']) }) +
-    cond('vehicleRestriction', '있음',
-      field({ name: 'vehicleRestrictionDetail', label: '제한 시간대·내용', required: true, input: text('vehicleRestrictionDetail', { required: true, placeholder: '예: 08:20~08:50 등교 시간 정문 차량 통제' }) })) +
-    field({ name: 'entryProcedure', label: '외부인 출입 절차', required: true, input: textarea('entryProcedure', { required: true, rows: 2, placeholder: '예: 정문 경비실에서 방문증 수령 후 출입, 교무실 경유' }) }));
-
-  const G = section('9. 기타', '',
-    `<h3 class="sub">참여 학급별 확정 인원·인솔 교사</h3><p class="desc">공문 인원과 다를 수 있어 확인합니다. 신청서 인원이 미리 채워져 있습니다.</p>` +
-    state.classes.map((c) => classBox(c,
-      field({ name: ck(c, 'count'), label: '확정 인원(명)', required: true, input: text(ck(c, 'count'), { type: 'number', required: true, inputmode: 'numeric', min: 0, value: c.n }) }) +
-      field({ name: ck(c, 'guide'), label: '인솔(담임) 교사 배치', required: true, input: radios(ck(c, 'guide'), ['배치 확정', '협의 필요']) }))).join('') +
-    `<h3 class="sub">공통</h3>` +
-    field({ name: 'specialNeeds', label: '도움이 필요한 학생·특이사항', input: textarea('specialNeeds', { rows: 2, placeholder: '예: 특수학급 통합 학생 1명(보조 인력 동행), 색각 이상 학생 등' }) }) +
-    field({ name: 'mediaConsent', label: '수업 사진·영상 촬영 및 결과보고 활용 동의', required: true, hint: '학생 얼굴이 식별되지 않도록 촬영하며, 결과보고·홍보 자료에만 활용합니다.', input: radios('mediaConsent', ['예', '아니오']) }) +
-    field({ name: 'surveyDevice', label: '만족도 조사(QR) 응답 기기 확보 가능', required: true, hint: '수업 마지막 5분에 학생 기기로 QR 설문에 응답합니다.', input: radios('surveyDevice', ['확보 가능', '어려움(종이 설문 요청)', '확인 필요']) }) +
     field({ name: 'etcRequest', label: '기타 요청사항', input: textarea('etcRequest', { rows: 3, placeholder: '자유롭게 적어 주세요.' }) }));
 
   const form = $('#form');
-  form.innerHTML = A + B + C + D + Esec + F + G;
+  form.innerHTML = A + B + C + D + Esec + F;
 
   form.addEventListener('change', onFormChange);
   form.addEventListener('input', onFormInput);
@@ -466,26 +427,17 @@ function collect() {
   const rec = {
     submittedAt: '', resubmit: '', latest: '',
     schoolId: s.id, schoolName: s.name, opDate: fmtDate(s.date, s.dow), program: s.program,
-    teacherName: v('teacherName'), teacherPhone: v('teacherPhone'), schoolPhone: v('schoolPhone'), altContact: v('altContact'),
+    teacherName: v('teacherName'), teacherPhone: v('teacherPhone'),
     p12Time: `${v('p12Start')}~${v('p12End')}`,
     p34Time: has34 ? `${v('p34Start')}~${v('p34End')}` : '(운영 없음)',
-    breakOk: v('breakOk'), breakInfo: v('breakInfo'),
     rooms: per('room', (c) => v(ck(c, 'room'))),
-    floorInfo: v('floorInfo'), elevator: v('elevator'), unloadPoint: v('unloadPoint'),
+    floorInfo: v('floorInfo'), elevator: v('elevator'),
     laptops: per('laptop', (c) => { const a = v(ck(c, 'laptop')); return a === '아니오' ? `아니오(최대 ${v(ck(c, 'laptopMax')) || '?'}대)` : a; }),
     wifi: v('wifi'), display: v('display'), displayConn: v('display') === '없음' ? '' : v('displayConn'),
-    usbPort: v('usbPort'),
-    securityRestrict: v('securityRestrict') + (v('securityRestrict') === '제한 있음' && v('securityDetail') ? ` (${v('securityDetail')})` : ''),
-    groupSeating: v('groupSeating'),
     threeClass: v('threeClass'), threeClassActual: v('threeClassActual'), threeRooms: v('threeRooms'),
     addClass: v('addClass'), addClassDetail: v('addClass') === '추가함' ? `${v('addClassName')} ${v('addClassN')}명` : '',
     programChange: v('programChange'), programChangeTo: v('programChangeTo'), programChangeReason: v('programChangeReason'),
-    parking: v('parking'),
-    vehicleRestriction: v('vehicleRestriction') + (v('vehicleRestriction') === '있음' ? ` (${v('vehicleRestrictionDetail')})` : ''),
-    entryProcedure: v('entryProcedure'),
-    confirmedCounts: per('count', (c) => `${v(ck(c, 'count'))}명`),
-    guideTeachers: per('guide', (c) => v(ck(c, 'guide'))),
-    specialNeeds: v('specialNeeds'), mediaConsent: v('mediaConsent'), surveyDevice: v('surveyDevice'), etcRequest: v('etcRequest'),
+    parking: v('parking'), etcRequest: v('etcRequest'),
     userAgent: navigator.userAgent, raw: '',
   };
   rec.raw = JSON.stringify({ schoolId: s.id, values: currentValues() });
