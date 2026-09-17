@@ -41,6 +41,7 @@ var HEADERS = [
   ['programChangeReason', '변경 사유'],
   ['parking', '주차 가능 위치'],
   ['etcRequest', '기타 요청사항'],
+  ['submitId', '제출 ID'],
   ['userAgent', '응답 기기'],
   ['raw', '원본 JSON'],
 ];
@@ -55,7 +56,19 @@ function doPost(e) {
     var sh = getSheet_();
     var idCol = colOf_('schoolId');
     var latestCol = colOf_('latest');
+    var submitIdCol = colOf_('submitId');
     var lastRow = sh.getLastRow();
+
+    // 같은 제출 ID가 이미 있으면(브라우저가 응답을 못 받고 재시도한 경우) 다시 적재하지 않는다
+    if (body.submitId && lastRow > 1) {
+      var sids = sh.getRange(2, submitIdCol, lastRow - 1, 1).getValues();
+      for (var k = 0; k < sids.length; k++) {
+        if (String(sids[k][0]) === String(body.submitId)) {
+          var r = sh.getRange(k + 2, 1, 1, HEADERS.length).getValues()[0];
+          return json_({ ok: true, duplicate: true, resubmit: /재제출/.test(String(r[colOf_('resubmit') - 1])), count: 1, submittedAt: String(r[0]), row: k + 2 });
+        }
+      }
+    }
 
     // 같은 학교의 이전 제출 행 → "최신" 표시 제거
     var prior = 0;

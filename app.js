@@ -45,11 +45,12 @@ const FIELD_DEFS = [
   ['programChangeReason', '변경 사유', 'E. 학급 편성·프로그램'],
   ['parking', '주차 가능 위치', 'F. 주차·기타'],
   ['etcRequest', '기타 요청사항', 'F. 주차·기타'],
+  ['submitId', '제출 ID', '_'],
   ['userAgent', '응답 기기', '_'],
   ['raw', '원본 JSON', '_'],
 ];
 
-const state = { data: null, school: null, classes: [], saveTimer: null };
+const state = { data: null, school: null, classes: [], saveTimer: null, submitId: '' };
 
 const $ = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
@@ -439,14 +440,18 @@ function collect() {
     addClass: v('addClass'), addClassDetail: v('addClass') === '추가함' ? `${v('addClassName')} ${v('addClassN')}명` : '',
     programChange: v('programChange'), programChangeTo: v('programChangeTo'), programChangeReason: v('programChangeReason'),
     parking: v('parking'), etcRequest: v('etcRequest'),
-    userAgent: navigator.userAgent, raw: '',
+    submitId: '', userAgent: navigator.userAgent, raw: '',
   };
   rec.raw = JSON.stringify({ schoolId: s.id, values: currentValues() });
   return rec;
 }
 
 /* ---------- 제출 ---------- */
-async function submit() {
+function newSubmitId() {
+  return (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : (Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 10));
+}
+/* retry=true 이면 직전 제출 ID를 재사용 → 서버가 같은 응답을 두 번 적재하지 않음 */
+async function submit(retry = false) {
   const bad = validate();
   if (bad.length) {
     bad[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -457,6 +462,8 @@ async function submit() {
   }
   saveDraft();
   const rec = collect();
+  if (!retry || !state.submitId) state.submitId = newSubmitId();
+  rec.submitId = state.submitId;
   rec.submittedAt = new Date().toLocaleString('ko-KR');
   if (!CONFIG.ENDPOINT) { showSubmitError('제출 서버 주소가 아직 설정되지 않았습니다. 담당자에게 알려 주세요.'); return; }
 
@@ -477,11 +484,14 @@ async function submit() {
     if (!out.ok) throw new Error(out.error || '서버에서 오류를 반환했습니다.');
     const done = { at: out.submittedAt || rec.submittedAt, count: out.count || 1 };
     lsSet(key('done'), done);
+    state.submitId = '';
     rec.submittedAt = done.at;
     rec.resubmit = out.resubmit ? `재제출(${done.count}회)` : '최초';
     renderResult(rec, out);
   } catch (e) {
-    showSubmitError(e.name === 'AbortError' ? '서버 응답이 없습니다(시간 초과).' : e.message);
+    showSubmitError(e.name === 'AbortError'
+      ? '서버 응답이 없습니다(시간 초과). 응답이 이미 저장되었을 수 있으며, 아래 "다시 시도"를 눌러도 중복 저장되지 않습니다.'
+      : e.message);
   } finally {
     clearTimeout(timer);
     setSubmitting(false);
@@ -497,7 +507,7 @@ function showSubmitError(msg) {
     계속 실패하면 ${esc(a.org)} ${esc(a.name)} <a href="tel:${esc(a.phone.replace(/-/g, ''))}">${esc(a.phone)}</a>로 연락 주시기 바랍니다.
     <button type="button" class="btn block" id="retryBtn">다시 시도</button>`;
   el.hidden = false;
-  $('#retryBtn').addEventListener('click', () => { el.hidden = true; submit(); });
+  $('#retryBtn').addEventListener('click', () => { el.hidden = true; submit(true); });
 }
 
 /* ---------- 4단계: 결과 요약 ---------- */
