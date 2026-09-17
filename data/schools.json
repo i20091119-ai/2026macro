@@ -1,0 +1,691 @@
+{
+  "_meta": {
+    "title": "2026. 학교로 찾아가는 SW체험수업 — 참여 학교 기본 정보",
+    "source": "학교 제출 참여 신청서 13건(2026.9.7.~9.14. 접수)",
+    "updated": "2026-09-17",
+    "programs": {
+      "P1": "① 컬러코드로 여는 길, 오조봇 미로 대탈출",
+      "P2": "② 조립하고 코딩하는 네오봇 정다각형 주행",
+      "P3": "③ 터틀봇으로 그리는 한붓그리기와 테셀레이션",
+      "P4": "④ 핑퐁로봇으로 완주하는 도로주행 코스",
+      "P5": "⑤ 마이크로비트로 겨루는 반응속도 챔피언십",
+      "P6": "⑥ 신호로 주고받는 비밀 메시지"
+    },
+    "flagNote": {
+      "threeClass": "1~2교시·3~4교시에 각각 3개 학급 동시 운영 대상 — 확인 문항 노출",
+      "canAddClass": "3~4교시에 1개 학급만 배정 — 1개 학급 추가 가능 문항 노출"
+    },
+    "fieldNote": {
+      "room": "신청서에 기재된 수업 장소. 빈 문자열이면 신청서 미기재 → 응답 시 필수 입력",
+      "cooperation": "신청서의 학교 협조 가능 여부 체크값. possible | negotiate",
+      "code": "학교 확인코드 4자리. 담당교사에게 문자/공문으로 개별 안내. 배포 전 반드시 변경"
+    }
+  },
+  "schools": [
+    {
+      "id": "pyeongsan",
+      "name": "평산초등학교",
+      "code": "4721",
+      "level": "초",
+      "date": "2026-10-06",
+      "dow": "화",
+      "programCode": "P1",
+      "program": "① 컬러코드로 여는 길, 오조봇 미로 대탈출",
+      "classCount": 4,
+      "studentCount": 82,
+      "periods": {
+        "p12": [
+          {
+            "class": "6-3",
+            "n": 20,
+            "room": "6-3 교실"
+          },
+          {
+            "class": "6-4",
+            "n": 21,
+            "room": "6-4 교실"
+          }
+        ],
+        "p34": [
+          {
+            "class": "6-1",
+            "n": 21,
+            "room": "6-1 교실"
+          },
+          {
+            "class": "6-2",
+            "n": 20,
+            "room": "6-2 교실"
+          }
+        ]
+      },
+      "contact": [
+        {
+          "name": "이지은",
+          "role": "담당자",
+          "phone": "010-2780-7769"
+        }
+      ],
+      "cooperation": {
+        "guideTeacher": "possible",
+        "schoolLaptop": "possible"
+      },
+      "flags": {
+        "threeClass": false,
+        "canAddClass": false
+      },
+      "notes": ""
+    },
+    {
+      "id": "wanwol",
+      "name": "완월초등학교",
+      "code": "3958",
+      "level": "초",
+      "date": "2026-10-08",
+      "dow": "목",
+      "programCode": "P3",
+      "program": "③ 터틀봇으로 그리는 한붓그리기와 테셀레이션",
+      "classCount": 4,
+      "studentCount": 96,
+      "periods": {
+        "p12": [
+          {
+            "class": "5-1",
+            "n": 23,
+            "room": "5-1"
+          },
+          {
+            "class": "5-2",
+            "n": 23,
+            "room": "5-2"
+          }
+        ],
+        "p34": [
+          {
+            "class": "6-1",
+            "n": 26,
+            "room": "6-1"
+          },
+          {
+            "class": "6-2",
+            "n": 24,
+            "room": "6-2"
+          }
+        ]
+      },
+      "contact": [
+        {
+          "name": "김수현",
+          "role": "담당자",
+          "phone": "010-5055-5399"
+        }
+      ],
+      "cooperation": {
+        "guideTeacher": "possible",
+        "schoolLaptop": "possible"
+      },
+      "flags": {
+        "threeClass": false,
+        "canAddClass": false
+      },
+      "notes": ""
+    },
+    {
+      "id": "paryong",
+      "name": "팔룡초등학교",
+      "code": "6203",
+      "level": "초",
+      "date": "2026-10-13",
+      "dow": "화",
+      "programCode": "P4",
+      "program": "④ 핑퐁로봇으로 완주하는 도로주행 코스",
+      "classCount": 3,
+      "studentCount": 59,
+      "periods": {
+        "p12": [
+          {
+            "class": "5-1",
+            "n": 16,
+            "room": "5-1교실"
+          },
+          {
+            "class": "5-2",
+            "n": 17,
+            "room": "5-2교실"
+          }
+        ],
+        "p34": [
+          {
+            "class": "6-1",
+            "n": 26,
+            "room": "6-1교실"
+          }
+        ]
+      },
+      "contact": [
+        {
+          "name": "이한나",
+          "role": "담당자",
+          "phone": "010-7447-4029"
+        }
+      ],
+      "cooperation": {
+        "guideTeacher": "possible",
+        "schoolLaptop": "negotiate"
+      },
+      "flags": {
+        "threeClass": false,
+        "canAddClass": true
+      },
+      "notes": "예약 연락처(010-2653-7623)와 신청서 담당자 연락처가 다름 — 협의 대상 확인 필요 / 노트북 협조 '협의 필요'"
+    },
+    {
+      "id": "bongnim",
+      "name": "봉림초등학교",
+      "code": "8147",
+      "level": "초",
+      "date": "2026-10-15",
+      "dow": "목",
+      "programCode": "P3",
+      "program": "③ 터틀봇으로 그리는 한붓그리기와 테셀레이션",
+      "classCount": 3,
+      "studentCount": 54,
+      "periods": {
+        "p12": [
+          {
+            "class": "6-2",
+            "n": 18,
+            "room": "6-2"
+          },
+          {
+            "class": "6-3",
+            "n": 18,
+            "room": "6-3"
+          }
+        ],
+        "p34": [
+          {
+            "class": "6-1",
+            "n": 18,
+            "room": "6-1"
+          }
+        ]
+      },
+      "contact": [
+        {
+          "name": "김나은",
+          "role": "담당자",
+          "phone": "055-262-7221"
+        }
+      ],
+      "cooperation": {
+        "guideTeacher": "possible",
+        "schoolLaptop": "possible"
+      },
+      "flags": {
+        "threeClass": false,
+        "canAddClass": true
+      },
+      "notes": ""
+    },
+    {
+      "id": "changwon-sinwol",
+      "name": "창원신월초등학교",
+      "code": "2596",
+      "level": "초",
+      "date": "2026-10-16",
+      "dow": "금",
+      "programCode": "P3",
+      "program": "③ 터틀봇으로 그리는 한붓그리기와 테셀레이션",
+      "classCount": 2,
+      "studentCount": 41,
+      "periods": {
+        "p12": [
+          {
+            "class": "6-1",
+            "n": 21,
+            "room": "6-1교실"
+          },
+          {
+            "class": "6-2",
+            "n": 20,
+            "room": "6-2교실"
+          }
+        ],
+        "p34": []
+      },
+      "contact": [
+        {
+          "name": "최정화",
+          "role": "업무 담당자",
+          "phone": "010-3065-9872"
+        },
+        {
+          "name": "김지민",
+          "role": "6학년 담임",
+          "phone": "010-4164-8680"
+        }
+      ],
+      "cooperation": {
+        "guideTeacher": "possible",
+        "schoolLaptop": "possible"
+      },
+      "flags": {
+        "threeClass": false,
+        "canAddClass": false
+      },
+      "notes": "통합예약포털 오류로 10.15.(목) 중복 접수 → 10.16.(금)으로 일자 조정. 2차시형(1~2교시만 운영)"
+    },
+    {
+      "id": "changwon-daesan-m",
+      "name": "창원대산중학교",
+      "code": "7364",
+      "level": "중",
+      "date": "2026-10-20",
+      "dow": "화",
+      "programCode": "P6",
+      "program": "⑥ 신호로 주고받는 비밀 메시지",
+      "classCount": 4,
+      "studentCount": 132,
+      "periods": {
+        "p12": [
+          {
+            "class": "1학년 1~3반",
+            "n": 75,
+            "room": "과학실, 도서실"
+          }
+        ],
+        "p34": [
+          {
+            "class": "2학년 1~3반",
+            "n": 57,
+            "room": "과학실, 도서실"
+          }
+        ]
+      },
+      "contact": [
+        {
+          "name": "진영훈",
+          "role": "담당자",
+          "phone": "010-2210-4583"
+        }
+      ],
+      "cooperation": {
+        "guideTeacher": "possible",
+        "schoolLaptop": "possible"
+      },
+      "flags": {
+        "threeClass": true,
+        "canAddClass": false
+      },
+      "notes": "1~2교시 1학년 3개 반, 3~4교시 2학년 3개 반 동시 운영. 신청서 장소는 과학실·도서실 2실만 기재 → 제3 교실 확인 필요. ⑥무선통신은 모둠별 채널 배정 필요(인접 교실 간섭)"
+    },
+    {
+      "id": "naedong",
+      "name": "내동초등학교",
+      "code": "1839",
+      "level": "초",
+      "date": "2026-10-22",
+      "dow": "목",
+      "programCode": "P1",
+      "program": "① 컬러코드로 여는 길, 오조봇 미로 대탈출",
+      "classCount": 4,
+      "studentCount": 84,
+      "periods": {
+        "p12": [
+          {
+            "class": "6-1",
+            "n": 21,
+            "room": "6-1교실"
+          },
+          {
+            "class": "6-4",
+            "n": 20,
+            "room": "6-4교실"
+          }
+        ],
+        "p34": [
+          {
+            "class": "5-1",
+            "n": 22,
+            "room": "5-1교실"
+          },
+          {
+            "class": "5-4",
+            "n": 21,
+            "room": "5-4교실"
+          }
+        ]
+      },
+      "contact": [
+        {
+          "name": "최진희",
+          "role": "담당자",
+          "phone": "010-7173-6379"
+        }
+      ],
+      "cooperation": {
+        "guideTeacher": "possible",
+        "schoolLaptop": "possible"
+      },
+      "flags": {
+        "threeClass": true,
+        "canAddClass": false
+      },
+      "notes": "신청서에는 교시당 2개 학급으로 기재되어 있으나 3개 학급 동시 운영 대상으로 분류됨 → 확인 문항으로 실제 학급 수 확정 필요"
+    },
+    {
+      "id": "wolpo",
+      "name": "월포초등학교",
+      "code": "5072",
+      "level": "초",
+      "date": "2026-10-27",
+      "dow": "화",
+      "programCode": "P2",
+      "program": "② 조립하고 코딩하는 네오봇 정다각형 주행",
+      "classCount": 4,
+      "studentCount": 85,
+      "periods": {
+        "p12": [
+          {
+            "class": "6-1",
+            "n": 20,
+            "room": "6-1 교실"
+          },
+          {
+            "class": "6-3",
+            "n": 20,
+            "room": "6-3 교실"
+          }
+        ],
+        "p34": [
+          {
+            "class": "6-2",
+            "n": 20,
+            "room": "6-2 교실"
+          },
+          {
+            "class": "5-1",
+            "n": 25,
+            "room": "5-1 교실"
+          }
+        ]
+      },
+      "contact": [
+        {
+          "name": "조현희",
+          "role": "담당자",
+          "phone": "010-5681-7613"
+        }
+      ],
+      "cooperation": {
+        "guideTeacher": "possible",
+        "schoolLaptop": "possible"
+      },
+      "flags": {
+        "threeClass": false,
+        "canAddClass": false
+      },
+      "notes": "②네오봇은 노트북 USB 포트 필수 — 기기 사양 확인 필요"
+    },
+    {
+      "id": "seongho",
+      "name": "성호초등학교",
+      "code": "9415",
+      "level": "초",
+      "date": "2026-10-29",
+      "dow": "목",
+      "programCode": "P4",
+      "program": "④ 핑퐁로봇으로 완주하는 도로주행 코스",
+      "classCount": 4,
+      "studentCount": 74,
+      "periods": {
+        "p12": [
+          {
+            "class": "5-1",
+            "n": 23,
+            "room": ""
+          },
+          {
+            "class": "5-2",
+            "n": 23,
+            "room": ""
+          }
+        ],
+        "p34": [
+          {
+            "class": "6-1",
+            "n": 14,
+            "room": ""
+          },
+          {
+            "class": "6-2",
+            "n": 14,
+            "room": ""
+          }
+        ]
+      },
+      "contact": [
+        {
+          "name": "김정주",
+          "role": "담당자",
+          "phone": "010-5149-2556"
+        }
+      ],
+      "cooperation": {
+        "guideTeacher": "possible",
+        "schoolLaptop": "negotiate"
+      },
+      "flags": {
+        "threeClass": false,
+        "canAddClass": false
+      },
+      "notes": "신청서에 수업 장소 미기재 → 응답 시 필수 입력 / 노트북 협조 '협의 필요'"
+    },
+    {
+      "id": "changwon-dong-m",
+      "name": "창원동중학교",
+      "code": "6681",
+      "level": "중",
+      "date": "2026-11-17",
+      "dow": "화",
+      "programCode": "P2",
+      "program": "② 조립하고 코딩하는 네오봇 정다각형 주행",
+      "classCount": 2,
+      "studentCount": 40,
+      "periods": {
+        "p12": [
+          {
+            "class": "1-1",
+            "n": 20,
+            "room": "과학2실"
+          },
+          {
+            "class": "1-2",
+            "n": 20,
+            "room": "다정다감실"
+          }
+        ],
+        "p34": []
+      },
+      "contact": [
+        {
+          "name": "조원진",
+          "role": "담당자",
+          "phone": "010-2838-2083"
+        }
+      ],
+      "cooperation": {
+        "guideTeacher": "possible",
+        "schoolLaptop": "negotiate"
+      },
+      "flags": {
+        "threeClass": false,
+        "canAddClass": false
+      },
+      "notes": "2차시형(1~2교시만 운영) / 노트북 협조 '협의 필요' — ②네오봇은 USB 포트 필수"
+    },
+    {
+      "id": "wolseong",
+      "name": "월성초등학교",
+      "code": "2947",
+      "level": "초",
+      "date": "2026-11-19",
+      "dow": "목",
+      "programCode": "P3",
+      "program": "③ 터틀봇으로 그리는 한붓그리기와 테셀레이션",
+      "classCount": 4,
+      "studentCount": 117,
+      "periods": {
+        "p12": [
+          {
+            "class": "5-1·5-2",
+            "n": 25,
+            "room": "5-2"
+          },
+          {
+            "class": "5-1·5-3",
+            "n": 26,
+            "room": "5-3"
+          }
+        ],
+        "p34": [
+          {
+            "class": "6-1·6-2",
+            "n": 33,
+            "room": "6-2"
+          },
+          {
+            "class": "6-1·6-3",
+            "n": 33,
+            "room": "6-3"
+          }
+        ]
+      },
+      "contact": [
+        {
+          "name": "김진아",
+          "role": "담당자",
+          "phone": "010-8553-1750"
+        }
+      ],
+      "cooperation": {
+        "guideTeacher": "possible",
+        "schoolLaptop": "negotiate"
+      },
+      "flags": {
+        "threeClass": true,
+        "canAddClass": false
+      },
+      "notes": "신청서 학년/반이 '5-1,5-2' '5-1,5-3' 형태로 이중 기재 — 실제 반 편성과 반별 인원 확정 필요. 1~2교시 5학년 3개 반 51명, 3~4교시 6학년 3개 반 66명으로 파악 / 노트북 협조 '협의 필요' / 11.19.는 수능일"
+    },
+    {
+      "id": "sanho",
+      "name": "산호초등학교",
+      "code": "3508",
+      "level": "초",
+      "date": "2026-11-24",
+      "dow": "화",
+      "programCode": "P3",
+      "program": "③ 터틀봇으로 그리는 한붓그리기와 테셀레이션",
+      "classCount": 4,
+      "studentCount": 88,
+      "periods": {
+        "p12": [
+          {
+            "class": "6-1",
+            "n": 24,
+            "room": ""
+          },
+          {
+            "class": "6-2",
+            "n": 24,
+            "room": ""
+          }
+        ],
+        "p34": [
+          {
+            "class": "5-1",
+            "n": 20,
+            "room": ""
+          },
+          {
+            "class": "5-2",
+            "n": 20,
+            "room": ""
+          }
+        ]
+      },
+      "contact": [
+        {
+          "name": "이지원",
+          "role": "담당자",
+          "phone": "070-4261-7742"
+        }
+      ],
+      "cooperation": {
+        "guideTeacher": "possible",
+        "schoolLaptop": "possible"
+      },
+      "flags": {
+        "threeClass": false,
+        "canAddClass": false
+      },
+      "notes": "신청서에 수업 장소 미기재 → 응답 시 필수 입력 / 담당자 연락처가 대표번호 형태(070) — 휴대폰 번호 확인 필요"
+    },
+    {
+      "id": "masan-jungang",
+      "name": "마산중앙초등학교",
+      "code": "7126",
+      "level": "초",
+      "date": "2026-11-26",
+      "dow": "목",
+      "programCode": "P4",
+      "program": "④ 핑퐁로봇으로 완주하는 도로주행 코스",
+      "classCount": 4,
+      "studentCount": 65,
+      "periods": {
+        "p12": [
+          {
+            "class": "5-1",
+            "n": 16,
+            "room": "5-1"
+          },
+          {
+            "class": "5-2",
+            "n": 16,
+            "room": "5-2"
+          }
+        ],
+        "p34": [
+          {
+            "class": "6-1",
+            "n": 16,
+            "room": "6-1"
+          },
+          {
+            "class": "6-2(확인 필요)",
+            "n": 17,
+            "room": "6-1(확인 필요)"
+          }
+        ]
+      },
+      "contact": [
+        {
+          "name": "서창희",
+          "role": "담당자",
+          "phone": "010-2552-1495"
+        }
+      ],
+      "cooperation": {
+        "guideTeacher": "possible",
+        "schoolLaptop": "possible"
+      },
+      "flags": {
+        "threeClass": false,
+        "canAddClass": false
+      },
+      "notes": "신청서 예약 일자가 11.30.(월)로 기재됨 — 실제 운영일 11.26.(목) / 3~4교시 학년·반이 모두 6-1로 기재(오기 추정) → 확인 필요"
+    }
+  ]
+}
