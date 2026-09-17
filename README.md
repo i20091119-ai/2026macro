@@ -12,6 +12,7 @@ style.css             모바일 우선 스타일
 app.js                로직 (학교 확인 → 신청서 카드 → 응답 폼 → 임시저장 → 제출 → 요약)
 data/schools.json     학교 정보(하드코딩)
 apps-script/Code.gs   구글시트 적재용 Apps Script
+assets/logo.png       상단 로고(선택). 없으면 글자로 대체
 ```
 
 ## 화면 흐름
