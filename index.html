@@ -9,14 +9,14 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Jua&display=swap">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=20260917c">
 </head>
 <body>
   <div class="rainbow" aria-hidden="true"></div>
   <header class="topbar">
     <div class="wrap">
       <div class="logo-box">
-        <img id="logo" src="assets/logo.png" alt="경상남도교육청 경남수학문화관 GNMC" onerror="this.parentNode.classList.add('nologo')">
+        <img id="logo" src="assets/logo.png" style="max-width:320px;width:80%;height:auto" alt="경상남도교육청 경남수학문화관 GNMC" onerror="this.parentNode.classList.add('nologo')">
         <span class="brand">경상남도교육청 경남수학문화관</span>
       </div>
       <h1><span class="h1-top">2026. 학교로 찾아가는 SW체험수업</span><span class="h1-main">사전 협의 응답</span></h1>
@@ -38,7 +38,7 @@
       <div class="field">
         <label class="lbl" for="codeInput">확인코드 4자리 <span class="req">*</span></label>
         <input id="codeInput" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="4" autocomplete="one-time-code" placeholder="예: 1234">
-        <p class="hint">확인코드는 담당교사께 문자·공문으로 개별 안내된 4자리 숫자입니다.</p>
+        <p class="hint">확인코드는 담당교사께 개별 안내드린 4자리 숫자입니다.</p>
         <p id="unlockError" class="err" hidden></p>
       </div>
       <button id="unlockBtn" type="button" class="btn primary block">본인 학교 확인</button>
@@ -65,6 +65,6 @@
 
   <div id="toast" class="toast" hidden></div>
 
-  <script src="app.js"></script>
+  <script src="app.js?v=20260917c"></script>
 </body>
 </html>
