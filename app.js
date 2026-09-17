@@ -12,7 +12,7 @@ const CONFIG = {
   ADMIN: { org: '경남수학문화관', name: '이상우', phone: '055-713-2197' },
   RETENTION: '2026. 12. 31.(사업 결과보고 완료 시)까지 보유 후 지체 없이 파기',
   STORAGE_PREFIX: 'swvisit2026:',
-  REQUEST_TIMEOUT_MS: 25000,
+  REQUEST_TIMEOUT_MS: 60000,
 };
 
 /* 구글시트 열 정의: [키, 열 제목, 섹션]. Apps Script의 HEADERS와 순서를 일치시킬 것 */
@@ -182,8 +182,9 @@ function renderInfo(s) {
 
 /* ---------- 3단계: 응답 폼 ---------- */
 function field({ name, label, required = false, hint = '', input }) {
+  const isGroup = input.includes('role="radiogroup"');
   return `<div class="field" data-field="${esc(name)}">
-    <label class="lbl" for="f-${esc(name)}">${esc(label)}${required ? '<span class="req">*</span>' : ''}</label>
+    <${isGroup ? 'div' : 'label'} class="lbl" ${isGroup ? '' : `for="f-${esc(name)}"`}>${esc(label)}${required ? '<span class="req">*</span>' : ''}</${isGroup ? 'div' : 'label'}>
     ${input}${hint ? `<p class="hint">${hint}</p>` : ''}<p class="err" hidden></p></div>`;
 }
 function text(name, { type = 'text', placeholder = '', required = false, value = '', inputmode = '', maxlength = 200, min = '' } = {}) {
